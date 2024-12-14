@@ -45,11 +45,13 @@ const app = Vue.createApp({
             const [resultType] = validScores.reduce((maxEntry, currentEntry) =>
                 currentEntry[1] > maxEntry[1] ? currentEntry : maxEntry
             );
-
-            return this.typeMapping[resultType[0]];
+            return this.typeMapping[resultType];
         }
     },
     methods: {
+        /**
+         * ランダムに質問を選ぶ
+         */
         shuffleQuestions() {
             const shuffled = [...this.questions].sort(() => Math.random() - 0.5);
             this.questions = shuffled.slice(0, 3);
@@ -69,7 +71,7 @@ const app = Vue.createApp({
             this.scores = Object.fromEntries(Object.keys(this.scores).map(key => [key, 0]));
             this.excludedTypes.clear(); // 除外されたタイプもリセット
             this.currentQuestionIndex = 0;
-            this.shuffleQuestions();
+            // this.shuffleQuestions();
         }
     },
     mounted() {
@@ -78,7 +80,7 @@ const app = Vue.createApp({
             .then(response => response.json())
             .then(data => {
                 this.questions = data.questions;
-                this.shuffleQuestions();
+                // this.shuffleQuestions();
             })
             .catch(error => console.error("JSONの読み込みエラー:", error));
     }
