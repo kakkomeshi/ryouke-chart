@@ -26,3 +26,13 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+.back-button {
+    background-color: #ccc;
+    color: #000;
+    margin-top: 10px;
+  }
+  .back-button:disabled {
+    background-color: #eee;
+    color: #888;
+    cursor: not-allowed;
+  }
