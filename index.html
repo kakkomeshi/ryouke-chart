@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>診断アプリ</title>
+    <title>おすすめリョ受けカプ診断チャート</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
-        <h1>おすすめリョ受けカプ診断チャート</h1>
-        <div id="question-container">
-            <p id="question">質問がここに表示されます</p>
-            <div id="options-container"></div>
+        <div v-if="currentQuestionIndex < questions.length" class="question">
+            <p>{{ questions[currentQuestionIndex].question }}</p>
+            <button
+                v-for="option in questions[currentQuestionIndex].options"
+                :key="option.answer"
+                class="button"
+                @click="handleAnswer(option.scores)"
+            >
+                {{ option.answer }}
+            </button>
         </div>
-        <div id="result-container" style="display:none;">
-            <p id="result">結果がここに表示されます</p>
-            <button id="retry-button">もう一度</button>
+        <div v-else>
+            <p id="result">診断結果: あなたは「{{ resultTypeName }}」タイプです！</p>
+            <button class="button" @click="resetQuiz">もう一度</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="app.js"></script>
 </body>
 </html>
