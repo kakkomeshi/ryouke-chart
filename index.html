@@ -18,13 +18,20 @@
         <!-- 質問画面 -->
         <div v-else-if="!quizFinished">
             <p>{{ questions[currentQuestionIndex].question }}</p>
-            <button v-for="option in questions[currentQuestionIndex].options" :key="option.answer" class="button"
-                @click="handleAnswer(option.scores)">
-                {{ option.answer }}
-            </button>
-            <button class="button back-button" @click="goBack" :disabled="currentQuestionIndex === 0">
-                一つ前に戻る
-            </button>
+            <!-- 回答ボタン群 -->
+            <div class="options">
+                <button v-for="option in questions[currentQuestionIndex].options" :key="option.answer" class="button"
+                    @click="handleAnswer(option.scores)">
+                    {{ option.answer }}
+                </button>
+            </div>
+
+            <!-- 戻るボタン -->
+            <div class="navigation">
+                <button class="button back-button" @click="goBack" :disabled="currentQuestionIndex === 0">
+                    一つ前に戻る
+                </button>
+            </div>
         </div>
         <!-- 結果画面 -->
         <div v-else>
