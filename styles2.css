@@ -1,0 +1,155 @@
+/* 全体のリセット */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* コンテンツの中央揃え */
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 質問部分のスタイル */
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+/* 回答ボタンのスタイル */
+button {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* 結果部分のスタイル */
+.result {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* リセットボタンのスタイル */
+button.reset {
+  background-color: #28a745;
+}
+
+button.reset:hover {
+  background-color: #218838;
+}
+
+/* アニメーションの準備 */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* スライドアニメーション */
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-in-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* モバイル対応 */
+@media (max-width: 480px) {
+  button {
+    width: 90%;
+    font-size: 1em;
+  }
+}
+
+.navigation {
+  margin-top: 20px;
+}
+
+button.back-button {
+  background-color: #ffc107;
+}
+
+button.back-button:hover {
+  background-color: #e0a800;
+}
+
+button.back-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.navigation {
+  margin-top: 20px;
+}
+
+button.back-button {
+  background-color: #ffc107;
+}
+
+button.back-button:hover {
+  background-color: #e0a800;
+}
+
+button.back-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

@@ -1,0 +1,272 @@
+{
+    "questions": [
+      {
+        "question": "年の差カプが好き",
+        "options": [
+          {
+            "answer": "はい",
+            "includedTypes": [
+              "RYG",
+              "INI",
+              "KIK",
+              "FJI",
+              "TDK",
+              "ATB",
+              "SND",
+              "NIO",
+              "BUN",
+              "YKM",
+              "TKG",
+              "RLF",
+              "MMS",
+              "KID",
+              "OIS",
+              "KWM",
+              "IBU",
+              "YTA",
+              "AKT",
+              "SNG",
+              "KRK",
+              "OSI",
+              "HYS",
+              "AKY",
+              "KNY",
+              "TNS",
+              "SRS",
+              "ZIZ",
+              "CAL",
+              "BYO",
+              "NAN"
+            ]
+          },
+          {
+            "answer": "いいえ",
+            "includedTypes": [
+              "KIN",
+              "DAN",
+              "PRA",
+              "KVN"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "包容力の有る攻めが好き",
+        "options": [
+          {
+            "answer": "はい",
+            "includedTypes": [
+              "TDK",
+              "ATB",
+              "YKM",
+              "RLF",
+              "MMS",
+              "OIS",
+              "KWM",
+              "KNY",
+              "SRS"
+            ]
+          },
+          {
+            "answer": "いいえ",
+            "includedTypes": []
+          }
+        ]
+      },
+      {
+        "question": "ライバル同士の関係に萌える？",
+        "options": [
+          {
+            "answer": "はい",
+            "includedTypes": [
+              "ATB",
+              "SND",
+              "KIN",
+              "YKM",
+              "IBU",
+              "YTA",
+              "AKT",
+              "KRK",
+              "HYS",
+              "AKY",
+              "TNS",
+              "PRA",
+              "KVN"
+            ]
+          },
+          {
+            "answer": "いいえ",
+            "includedTypes": []
+          }
+        ]
+      },
+      {
+        "question": "二人で行くデート先は？",
+        "options": [
+          {
+            "answer": "水族館",
+            "includedTypes": [
+              "RYG",
+              "INI",
+              "KIK",
+              "FJI",
+              "TDK",
+              "ATB",
+              "SND",
+              "NIO",
+              "BUN",
+              "KIN",
+              "YKM"
+            ]
+          },
+          {
+            "answer": "遊園地",
+            "includedTypes": [
+              "RYG",
+              "KIK",
+              "FJI",
+              "ATB",
+              "SND",
+              "NIO",
+              "BUN",
+              "KIN",
+              "YKM"
+            ]
+          },
+          {
+            "answer": "温泉",
+            "includedTypes": [
+              "TDK",
+              "ATB",
+              "SND",
+              "NIO",
+              "YKM"
+            ]
+          },
+          {
+            "answer": "ゲームセンター",
+            "includedTypes": [
+              "RYG",
+              "KIK",
+              "NIO",
+              "BUN",
+              "KIN"
+            ]
+          },
+          {
+            "answer": "おうちデート",
+            "includedTypes": [
+              "FJI",
+              "TDK",
+              "ATB",
+              "NIO",
+              "YKM"
+            ]
+          },
+          {
+            "answer": "映画館",
+            "includedTypes": [
+              "RYG",
+              "INI",
+              "KIK",
+              "FJI",
+              "TDK",
+              "ATB",
+              "NIO",
+              "YKM"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "二人が食事に行くなら？",
+        "options": [
+          {
+            "answer": "ハンバーガー屋",
+            "includedTypes": [
+              "RYG",
+              "INI",
+              "KIK",
+              "FJI",
+              "TDK",
+              "NIO",
+              "BUN",
+              "KIN",
+              "RLF",
+              "MMS",
+              "KID",
+              "OIS",
+              "KWM",
+              "IBU",
+              "YTA",
+              "AKT",
+              "SNG",
+              "DAN",
+              "KRK",
+              "OSI",
+              "HYS",
+              "AKY",
+              "KNY",
+              "TNS",
+              "SRS",
+              "ZIZ",
+              "BYO",
+              "NAN"
+            ]
+          },
+          {
+            "answer": "ラーメン屋",
+            "includedTypes": [
+              "RYG"
+            ]
+          },
+          {
+            "answer": "定食屋",
+            "includedTypes": [
+              "INI"
+            ]
+          },
+          {
+            "answer": "高級フレンチ",
+            "includedTypes": []
+          },
+          {
+            "answer": "ファミレス",
+            "includedTypes": [
+              "RYG",
+              "INI",
+              "KIK"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "リョーマくんから愛されてる？",
+        "options": [
+          {
+            "answer": "はい",
+            "includedTypes": [
+              "CAL"
+            ]
+          },
+          {
+            "answer": "いいえ",
+            "includedTypes": []
+          }
+        ]
+      },
+      {
+        "question": "二人のスキンシップは",
+        "options": [
+          {
+            "answer": "多い",
+            "includedTypes": []
+          },
+          {
+            "answer": "控えめ",
+            "includedTypes": []
+          }
+        ]
+      }
+    ]
+  }
