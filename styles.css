@@ -1,12 +1,47 @@
 /* 全体のリセット */
 body,
 html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  background-color: #4a6ed9; /* 青 */
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.content-box {
+  background-color: white;  /* 背景色を白に設定 */
+    border-radius: 10px;      /* 角丸 */
+    padding: 20px;            /* 内側の余白 */
+    width: 400px;             /* 固定幅 */
+    /* height: 300px;            固定高さ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* ボックスに影を追加 */}
+
+/* 診断の説明画面のスタイル */
+.intro-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* 診断スタートボタンのスタイル */
+.start-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.start-button:hover {
+  background-color: #45a049;
 }
 
 /* コンテンツの中央揃え */
@@ -15,6 +50,12 @@ html {
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center; */
 }
 
 /* 質問部分のスタイル */
@@ -62,54 +103,6 @@ button.reset {
 
 button.reset:hover {
   background-color: #218838;
-}
-
-/* アニメーションの準備 */
-.fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-/* スライドアニメーション */
-.slide-in-left {
-  animation: slideInLeft 0.5s ease-in-out;
-}
-
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.slide-in-right {
-  animation: slideInRight 0.5s ease-in-out;
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 /* モバイル対応 */

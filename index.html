@@ -7,40 +7,52 @@
     <title>おすすめリョ受けカプ診断チャート</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animation.css">
 </head>
 
 <body>
     <div id="app">
-        <!-- ローディング画面 -->
-        <div v-if="isLoading">
-            <p>読み込み中...</p>
+        <!-- 診断の説明画面 -->
+        <div v-if="!quizStarted" class="intro-screen">
+            <div class="content-box">
+                <h2>おすすめリョ受けカプ診断</h2>
+                <p>あなたにぴったりのリョ受けカプを診断します！</p>
+                <button @click="startQuiz" class="start-button">診断スタート</button>
+            </div>
         </div>
+
+        <!-- ローディング画面 -->
+        <div v-if="isLoading && quizStarted">
+            <div class="content-box">
+                <p>読み込み中...</p>
+            </div>
+        </div>
+
         <!-- 質問画面 -->
-        <div v-else-if="!quizFinished">
-            <p>{{ questions[currentQuestionIndex].question }}</p>
-            <!-- 回答ボタン群 -->
-            <div class="options">
-                <button v-for="option in questions[currentQuestionIndex].options" :key="option.answer" class="button"
-                    @click="handleAnswer(option)"> {{ option.answer }}
-                </button>
-                <!-- 戻るボタン -->
+        <div v-else-if="!quizFinished && quizStarted">
+            <div class="content-box">
+                <p>{{ questions[currentQuestionIndex].question }}</p>
+                <div class="options">
+                    <button v-for="option in questions[currentQuestionIndex].options" :key="option.answer"
+                        class="button" @click="handleAnswer(option)"> {{ option.answer }}
+                    </button>
+                </div>
                 <div class="navigation">
                     <button class="button back-button" @click="goBack" :disabled="nowQuestionIndex === 0">
                         一つ前に戻る
                     </button>
                 </div>
             </div>
-            <!-- <p >今何問目：{{ nowQuestionIndex }}</p> -->
-            <!-- <p >質問履歴：{{ questionHistory }}</p> -->
-            <p >候補カプ{{ remainingTypes }}</p>
+            <!-- <p>候補カプ: {{ remainingTypes }}</p> -->
         </div>
-        <div v-else>
-            <p v-if="result === '該当なし'">診断結果: 該当なし</p>
-            <p v-else-if="result === '複数候補'">診断結果: 複数候補あり</p>
-            <p v-else>診断結果: {{ result }}</p>
-            <button @click="resetQuiz">もう一度診断する</button>
-            <!-- <p >質問履歴：{{ questionHistory }}</p> -->
-            <p >候補カプ{{ remainingTypes }}</p>
+
+        <!-- 結果画面 -->
+        <div v-if="quizFinished">
+            <div class="content-box">
+                <p>診断結果: {{ result }}</p>
+                <button @click="resetQuiz">もう一度診断する</button>
+            </div>
+            <!-- <p>候補カプ: {{ remainingTypes }}</p> -->
         </div>
     </div>
     <script src="app.js"></script>

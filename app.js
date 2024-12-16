@@ -9,10 +9,20 @@ const app = Vue.createApp({
             quizFinished: false, // 診断終了フラグ
             result: null,//結果
             questionHistory: [],//質問の履歴
-            nowQuestionIndex: 0//今の質問数のインデックス
+            nowQuestionIndex: 0,//今の質問数のインデックス
+            quizStarted: false, // 診断が開始されたかどうかのフラグ
         };
     },
     methods: {
+        startQuiz() {
+            const container = document.getElementById('app');
+            container.classList.remove('slide-in-left', 'slide-in-right');
+            container.offsetWidth; // 強制的に再描画
+            container.classList.add('slide-in-right');
+
+            this.quizStarted = true; // 診断をスタート
+            this.loadQuestions(); // 質問をロード
+        },
         loadQuestions() {
             // JSONデータを読み込む（ここではローカルで定義）
             fetch("question.json")
@@ -177,17 +187,23 @@ const app = Vue.createApp({
             }
         },
         resetQuiz() {
+            // const container = document.getElementById('app');
+            // container.classList.remove('slide-in-right', 'slide-in-left');
+            // container.offsetWidth; // 強制的に再描画
+            // container.classList.add('slide-in-left');
             // 状態をリセット
             this.currentQuestionIndex = 0;
             this.remainingTypes = JSON.parse(JSON.stringify(this.types))
             this.quizFinished = false;
+            this.quizStarted = false; 
             this.questionHistory = [];//質問の履歴
             this.nowQuestionIndex = 0;//今何問目？
             this.loadQuestions();
         },
     },
     mounted() {
-        this.loadQuestions();
+        // this.quizStarted = true; // 診断をスタート
+        // this.loadQuestions();
     }
 });
 
