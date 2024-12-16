@@ -2,15 +2,14 @@ const app = Vue.createApp({
     data() {
         return {
             questions: [], // 質問データを格納
+            types: [],//タイプ一覧
             currentQuestionIndex: 0, // 現在の質問
             remainingTypes: [], // 残った診断結果候補
-            selectedAnswers: [], // 選んだ回答を記録
             isLoading: true, // JSON読み込み中の状態
             quizFinished: false, // 診断終了フラグ
-            types: [],//タイプ一覧
-            excludedHistory: [], // 各質問で除外されたタイプを記録
             result: null,//結果
-
+            questionHistory: [],//質問の履歴
+            nowQuestionIndex: 0//今の質問数のインデックス
         };
     },
     methods: {
@@ -20,9 +19,7 @@ const app = Vue.createApp({
                 .then((response) => response.json())
                 .then((data) => {
                     this.questions = data.questions;
-                    // this.types = Object.keys(data.types);
-                    // this.remainingTypes = JSON.parse(JSON.stringify(this.types))
-                    // this.isLoading = false; // JSON読み込み完了
+                    this.selectRandomQuestion(); // 最初の質問をランダムに選択
                 });
             fetch("code.json")
                 .then((response) => response.json())
@@ -32,7 +29,51 @@ const app = Vue.createApp({
                     this.isLoading = false; // JSON読み込み完了
 
                 });
+        },
+        // 質問を最初からランダムに選ぶ
+        selectRandomQuestion() {
+            // 最初の質問は全ての質問の中からランダムで選ぶ
+            const randomIndex = Math.floor(Math.random() * this.questions.length);
+            this.currentQuestionIndex = randomIndex;
 
+            this.questionHistory.push(
+                {
+                    questIndex: this.currentQuestionIndex,
+                    answered: null,
+                    excludedTypes: []
+                }
+            )
+            // this.nowQuestionIndex++;//何問目かを追加
+        },
+
+        // 次の質問を選ぶ
+        selectNextQuestion() {
+            const validQuestions = this.questions.filter((question, index) => {
+                // すでに出題された質問でないことを確認
+                const isNotAsked = !this.questionHistory.some(history => history.questIndex === index);
+                // 残ったタイプに関連する質問であることを確認
+                const hasRelevantTypes = question.options.some(option =>
+                    option.includedTypes.some(type => this.remainingTypes.includes(type))
+                );
+                return isNotAsked && hasRelevantTypes;
+            });
+
+            //選べる質問の中からランダムで出題。ない場合は終了判定へ
+            if (validQuestions.length > 0) {
+                const randomQuestion = validQuestions[Math.floor(Math.random() * validQuestions.length)];
+                this.currentQuestionIndex = this.questions.indexOf(randomQuestion);
+            } else {
+                this.calculateResult();
+            }
+            this.questionHistory.push(
+                {
+                    questIndex: this.currentQuestionIndex,
+                    answered: null,
+                    // includeTypes: [],
+                    excludedTypes: []
+                }
+            )
+            this.nowQuestionIndex++;//何問目かを追加
         },
         handleAnswer(selectedOption) {
             const container = document.getElementById('app');
@@ -40,14 +81,10 @@ const app = Vue.createApp({
             container.offsetWidth; // 強制的に再描画
             container.classList.add('slide-in-right');
 
-            // 現在の質問の履歴を記録
-            this.selectedAnswers[this.currentQuestionIndex] = selectedOption.includedTypes;
-
-            // 除外されたタイプを計算して記録
-            const excludedTypes = this.remainingTypes.filter(
+            this.questionHistory[this.nowQuestionIndex ].answered = selectedOption;
+            this.questionHistory[this.nowQuestionIndex ].excludedTypes = this.remainingTypes.filter(
                 (type) => !selectedOption.includedTypes.includes(type)
-            );
-            this.excludedHistory[this.currentQuestionIndex] = excludedTypes;
+            );;
 
             // タイプを絞り込む処理
             if (selectedOption.answer !== "どちらともいえない") {
@@ -55,25 +92,11 @@ const app = Vue.createApp({
                     selectedOption.includedTypes.includes(type)
                 );
             }
-            // 次の質問に進む
-            if (this.currentQuestionIndex < this.questions.length - 1) {
-                this.currentQuestionIndex++;
-            } else {
-                this.quizFinished = true; // 診断終了
-                this.calculateResult();
-            }
+            //終了判定
+            this.calculateResult();
+            // 次の質問を選ぶ
+            this.selectNextQuestion();
 
-            // // タイプを絞り込む処理
-            // this.remainingTypes = this.remainingTypes.filter((type) =>
-            //     selectedOption.includedTypes.includes(type)
-            // );
-
-            // // 次の質問へ進む
-            // if (this.currentQuestionIndex < this.questions.length - 1) {
-            //     this.currentQuestionIndex++;
-            // } else {
-            //     this.quizFinished = true; // 診断終了
-            // }
         },
         goBack() {
             const container = document.getElementById('app');
@@ -81,64 +104,63 @@ const app = Vue.createApp({
             container.offsetWidth; // 強制的に再描画
             container.classList.add('slide-in-left');
 
-            if (this.currentQuestionIndex > 0) {
-                // 現在の質問で除外されたタイプを復元
-                const lastExcludedTypes = this.excludedHistory[this.currentQuestionIndex - 1] || [];
+            if (this.nowQuestionIndex > 0) {
+                // 最後の質問を戻る
+                const previousQuestionIndex = this.questionHistory[this.nowQuestionIndex - 1].questIndex; // 戻る先の質問インデックス
+                this.currentQuestionIndex = previousQuestionIndex; // 戻る先の質問をセット
+
+                // 戻り先の質問で除外されたタイプを復元
+                const lastExcludedTypes = this.questionHistory[this.nowQuestionIndex - 1].excludedTypes || [];
                 this.remainingTypes = [...this.remainingTypes, ...lastExcludedTypes];
 
-                // 質問を一つ戻る
-                this.currentQuestionIndex--;
+                // 履歴から消す
+                this.questionHistory.pop();
+                this.nowQuestionIndex--;
             }
 
-            // if (this.currentQuestionIndex > 0) {
-            //     this.currentQuestionIndex--;
-
-            //     // 前回の選択肢から remainingTypes を復元
-            //     const previousIncludedTypes = this.selectedAnswers[this.currentQuestionIndex];
-            //     const currentQuestionOptions = this.questions[this.currentQuestionIndex].options;
-
-            //     // 質問に含まれるすべてのタイプを取得
-            //     const allPossibleTypes = currentQuestionOptions
-            //         .map((option) => option.includedTypes)
-            //         .flat();
-
-            //     // 次の remainingTypes を計算（前回の回答に基づいて戻す）
-            //     this.remainingTypes = this.remainingTypes.filter((type) =>
-            //         allPossibleTypes.includes(type) || previousIncludedTypes.includes(type)
-            //     );
-            // }
-            // if (this.currentQuestionIndex > 0) {
-            //     this.currentQuestionIndex--;
-            //     const previousAnswer = this.selectedAnswers.pop();
-
-            //     // 候補を復元
-            //     this.remainingTypes = this.remainingTypes.concat(previousAnswer.excludedTypes);
-            // }
         },
         calculateResult() {
+            //絞り込み結果が0件
+            if (this.remainingTypes.length === 0) {
+                this.result = "該当なし";
+                this.quizFinished = true;
+            }
+            //絞り込み結果が１件で特定されている
             if (this.remainingTypes.length === 1) {
                 this.result = this.remainingTypes[0];
-            } else if (this.remainingTypes.length === 0) {
-                this.result = "該当なし";
-            } else {
-                this.result = "複数候補";
+                this.quizFinished = true;
+            }
+            //現在の質問数が全質問数に到達している
+            if (this.nowQuestionIndex === this.questions.length) {
+                //絞り込み結果が0件
+                if (this.remainingTypes.length === 0) {
+                    this.result = "該当なし";
+                    this.quizFinished = true;
+                }
+                //絞り込み結果が１件で特定されている
+                else if (this.remainingTypes.length === 1) {
+                    this.result = this.remainingTypes[0];
+                    this.quizFinished = true;
+                }
+                else {
+                    //絞り込み結果が複数ある
+                    this.result = this.remainingTypes;
+                    this.quizFinished = true;
+                }
             }
         },
         resetQuiz() {
             // 状態をリセット
             this.currentQuestionIndex = 0;
             this.remainingTypes = JSON.parse(JSON.stringify(this.types))
-            this.selectedAnswers = [];
             this.quizFinished = false;
+            this.questionHistory = [];//質問の履歴
+            this.nowQuestionIndex = 0;//今何問目？
+            this.loadQuestions();
         },
-        resetRemainingType() {
-            this.remainingTypes.add
-
-        }
     },
     mounted() {
         this.loadQuestions();
-        // this.resetQuiz()
     }
 });
 
