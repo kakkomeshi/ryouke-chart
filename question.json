@@ -1,392 +1,1018 @@
 {
     "questions": [
         {
-            "question": "二人で行くデート先は？",
+            "question": "年の差カプが好き",
+            "options": [
+                {
+                    "answer": "はい",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "CAL",
+                        "BYO",
+                        "NAN"
+                    ]
+                },
+                {
+                    "answer": "いいえ",
+                    "includedTypes": [
+                        "KIN",
+                        "DAN",
+                        "PRA",
+                        "KVN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "包容力の有る攻めが好き",
+            "options": [
+                {
+                    "answer": "はい",
+                    "includedTypes": [
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "YKM",
+                        "RLF",
+                        "MMS",
+                        "OIS",
+                        "KWM",
+                        "KNY",
+                        "SRS"
+                    ]
+                },
+                {
+                    "answer": "いいえ",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "TKG",
+                        "KID",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "TNS",
+                        "ZIZ",
+                        "CAL",
+                        "BYO",
+                        "NAN",
+                        "PRA",
+                        "KVN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "ライバル同士の関係に萌える？",
+            "options": [
+                {
+                    "answer": "はい",
+                    "includedTypes": [
+                        "ATB",
+                        "SND",
+                        "KIN",
+                        "YKM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "KRK",
+                        "HYS",
+                        "AKY",
+                        "TNS",
+                        "PRA",
+                        "KVN"
+                    ]
+                },
+                {
+                    "answer": "いいえ",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "NIO",
+                        "BUN",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "SNG",
+                        "DAN",
+                        "OSI",
+                        "KNY",
+                        "SRS",
+                        "ZIZ",
+                        "CAL",
+                        "BYO",
+                        "NAN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "二人がデートに行くなら？",
             "options": [
                 {
                     "answer": "水族館",
-                    "scores": {
-                        "RYG": 2,
-                        "INU": 4,
-                        "KIK": 3,
-                        "FJI": 3,
-                        "DKA": 3,
-                        "ATO": 3,
-                        "SAN": 2,
-                        "NIO": 4,
-                        "BUN": 2,
-                        "KIN": 3,
-                        "YUK": 2,
-                        "TOK": 2,
-                        "RAL": 3
-                    }
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "PRA",
+                        "KVN"
+                    ]
                 },
                 {
                     "answer": "遊園地",
-                    "scores": {
-                        "RYG": 2,
-                        "INU": 1,
-                        "KIK": 3,
-                        "FJI": 2,
-                        "DKA": 1,
-                        "ATO": 2,
-                        "SAN": 4,
-                        "NIO": 1,
-                        "BUN": 3,
-                        "KIN": 5,
-                        "YUK": 2,
-                        "TOK": 1,
-                        "RAL": 1
-                    }
+                    "includedTypes": [
+                        "RYG",
+                        "KIK",
+                        "FJI",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "PRA",
+                        "KVN"
+                    ]
+                },
+                {
+                    "answer": "植物園",
+                    "includedTypes": [
+                        "INI",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "NIO",
+                        "BUN",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "IBU",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "PRA"
+                    ]
                 },
                 {
                     "answer": "温泉",
-                    "scores": {
-                        "RYG": 1,
-                        "INU": 1,
-                        "KIK": 0,
-                        "FJI": 2,
-                        "DKA": 3,
-                        "ATO": 2,
-                        "SAN": 1,
-                        "NIO": 0,
-                        "BUN": 0,
-                        "KIN": 0,
-                        "YUK": 4,
-                        "TOK": 2,
-                        "RAL": 2
-                    }
+                    "includedTypes": [
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "BYO",
+                        "NAN"
+                    ]
                 },
                 {
                     "answer": "ゲームセンター",
-                    "scores": {
-                        "RYG": 2,
-                        "INU": 1,
-                        "KIK": 2,
-                        "FJI": 1,
-                        "DKA": 0,
-                        "ATO": 0,
-                        "SAN": 2,
-                        "NIO": 3,
-                        "BUN": 4,
-                        "KIN": 2,
-                        "YUK": 0,
-                        "TOK": 2,
-                        "RAL": 0
-                    }
+                    "includedTypes": [
+                        "RYG",
+                        "KIK",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "TKG",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "KVN"
+                    ]
+                },
+                {
+                    "answer": "おうちデート",
+                    "includedTypes": [
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "NIO",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "CAL",
+                        "KVN"
+                    ]
                 },
                 {
                     "answer": "映画館",
-                    "scores": {
-                        "RYG": 3,
-                        "INU": 3,
-                        "KIK": 3,
-                        "FJI": 2,
-                        "DKA": 3,
-                        "ATO": 3,
-                        "SAN": 1,
-                        "NIO": 2,
-                        "BUN": 1,
-                        "KIN": 0,
-                        "YUK": 2,
-                        "TOK": 3,
-                        "RAL": 4
-                    }
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "NIO",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "SRS",
+                        "ZIZ",
+                        "PRA",
+                        "KVN"
+                    ]
                 }
             ]
         },
         {
-            "question": "リョーマくんを食事に誘うなら？",
+            "question": "二人が食事に行くなら？",
             "options": [
                 {
                     "answer": "ハンバーガー屋",
-                    "scores": {
-                        "RYG": 4,
-                        "INU": 1,
-                        "KIK": 4,
-                        "FJI": 2,
-                        "DKA": 2,
-                        "ATO": 1,
-                        "SAN": 1,
-                        "NIO": 2,
-                        "BUN": 3,
-                        "KIN": 3,
-                        "YUK": 0,
-                        "TOK": 1,
-                        "RAL": 3
-                    }
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "NAN",
+                        "KVN"
+                    ]
                 },
                 {
                     "answer": "ラーメン屋",
-                    "scores": {
-                        "RYG": 2,
-                        "INU": 2,
-                        "KIK": 3,
-                        "FJI": 2,
-                        "DKA": 2,
-                        "ATO": 1,
-                        "SAN": 3,
-                        "NIO": 3,
-                        "BUN": 5,
-                        "KIN": 3,
-                        "YUK": 2,
-                        "TOK": 0,
-                        "RAL": 0
-                    }
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "YKM",
+                        "TKG",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "BYO",
+                        "NAN",
+                        "KVN"
+                    ]
                 },
                 {
                     "answer": "定食屋",
-                    "scores": {
-                        "RYG": 1,
-                        "INU": 4,
-                        "KIK": 1,
-                        "FJI": 1,
-                        "DKA": 4,
-                        "ATO": 2,
-                        "SAN": 5,
-                        "NIO": 2,
-                        "BUN": 0,
-                        "KIN": 1,
-                        "YUK": 4,
-                        "TOK": 4,
-                        "RAL": 1
-                    }
+                    "includedTypes": [
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "YKM",
+                        "TKG",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "BYO",
+                        "NAN"
+                    ]
                 },
                 {
                     "answer": "高級フレンチ",
-                    "scores": {
-                        "RYG": 0,
-                        "INU": 1,
-                        "KIK": 0,
-                        "FJI": 2,
-                        "DKA": 0,
-                        "ATO": 5,
-                        "SAN": 0,
-                        "NIO": 1,
-                        "BUN": 0,
-                        "KIN": 0,
-                        "YUK": 2,
-                        "TOK": 2,
-                        "RAL": 4
-                    }
+                    "includedTypes": [
+                        "ATB",
+                        "RLF",
+                        "BYO",
+                        "PRA"
+                    ]
                 },
                 {
                     "answer": "ファミレス",
-                    "scores": {
-                        "RYG": 3,
-                        "INU": 2,
-                        "KIK": 2,
-                        "FJI": 3,
-                        "DKA": 2,
-                        "ATO": 1,
-                        "SAN": 1,
-                        "NIO": 2,
-                        "BUN": 2,
-                        "KIN": 3,
-                        "YUK": 2,
-                        "TOK": 3,
-                        "RAL": 2
-                    }
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "YKM",
+                        "TKG",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "BYO",
+                        "NAN",
+                        "KVN"
+                    ]
                 }
             ]
         },
         {
-            "question": "リョーマくんが寂しがっているとき…",
+            "question": "リョーマくんから",
             "options": [
                 {
-                    "answer": "車でお迎えに行く",
-                    "scores": {
-                        "RYG": 0,
-                        "INU": 0,
-                        "KIK": 0,
-                        "FJI": 0,
-                        "DKA": 0,
-                        "ATO": 8,
-                        "SAN": 0,
-                        "NIO": 0,
-                        "BUN": 0,
-                        "KIN": 0,
-                        "YUK": 0,
-                        "TOK": 0,
-                        "RAL": 7
-                    }
-                },
-                {
-                    "answer": "自転車で向かう",
-                    "scores": {
-                        "RYG": 3,
-                        "INU": 2,
-                        "KIK": 2,
-                        "FJI": 1,
-                        "DKA": 1,
-                        "ATO": 0,
-                        "SAN": 2,
-                        "NIO": 5,
-                        "BUN": 4,
-                        "KIN": 2,
-                        "YUK": 1,
-                        "TOK": 0,
-                        "RAL": 0
-                    }
-                },
-                {
-                    "answer": "走って行く！",
-                    "scores": {
-                        "RYG": 3,
-                        "INU": 3,
-                        "KIK": 4,
-                        "FJI": 1,
-                        "DKA": 2,
-                        "ATO": 1,
-                        "SAN": 3,
-                        "NIO": 2,
-                        "BUN": 1,
-                        "KIN": 7,
-                        "YUK": 2,
-                        "TOK": 3,
-                        "RAL": 1
-                    }
-                },
-                {
-                    "answer": "電話をかける",
-                    "scores": {
-                        "RYG": 4,
-                        "INU": 5,
-                        "KIK": 4,
-                        "FJI": 5,
-                        "DKA": 7,
-                        "ATO": 1,
-                        "SAN": 5,
-                        "NIO": 3,
-                        "BUN": 1,
-                        "KIN": 1,
-                        "YUK": 7,
-                        "TOK": 7,
-                        "RAL": 2
-                    }
+                    "answer": "愛されてる",
+                    "includedTypes": [
+                        "CAL"
+                    ]
                 }
             ]
         },
         {
-            "question": "ファーストキスはどちらから？",
-            "options": [
-                {
-                    "answer": "リョーマくんから",
-                    "scores": {
-                        "RYG": 1,
-                        "INU": 4,
-                        "KIK": 1,
-                        "FJI": 1,
-                        "DKA": 2,
-                        "ATO": 1,
-                        "SAN": 4,
-                        "NIO": 1,
-                        "BUN": 1,
-                        "KIN": 1,
-                        "YUK": 3,
-                        "TOK": 4,
-                        "RAL": 1
-                    }
-                },
-                {
-                    "answer": "攻めから",
-                    "scores": {
-                        "RYG": 4,
-                        "INU": 1,
-                        "KIK": 4,
-                        "FJI": 4,
-                        "DKA": 3,
-                        "ATO": 4,
-                        "SAN": 1,
-                        "NIO": 4,
-                        "BUN": 4,
-                        "KIN": 4,
-                        "YUK": 2,
-                        "TOK": 1,
-                        "RAL": 4
-                    }
-                }
-            ]
-        },
-        {
-            "question": "スキンシップは",
+            "question": "二人のスキンシップは",
             "options": [
                 {
                     "answer": "多い",
-                    "scores": {
-                        "RYG": 5,
-                        "INU": 0,
-                        "KIK": 5,
-                        "FJI": 3,
-                        "DKA": 2,
-                        "ATO": 3,
-                        "SAN": 3,
-                        "NIO": 2,
-                        "BUN": 5,
-                        "KIN": 5,
-                        "YUK": 3,
-                        "TOK": 1,
-                        "RAL": 3
-                    }
+                    "includedTypes": [
+                        "RYG",
+                        "KIK",
+                        "FJI",
+                        "ATB",
+                        "BUN",
+                        "KIN",
+                        "YKM",
+                        "MMS",
+                        "SNG",
+                        "DAN",
+                        "OSI",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "CAL"
+                    ]
                 },
                 {
                     "answer": "控えめ",
-                    "scores": {
-                        "RYG": 0,
-                        "INU": 5,
-                        "KIK": 0,
-                        "FJI": 2,
-                        "DKA": 3,
-                        "ATO": 2,
-                        "SAN": 2,
-                        "NIO": 3,
-                        "BUN": 0,
-                        "KIN": 0,
-                        "YUK": 2,
-                        "TOK": 4,
-                        "RAL": 2
-                    }
+                    "includedTypes": [
+                        "INI",
+                        "FJI",
+                        "TDK",
+                        "SND",
+                        "NIO",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "SRS",
+                        "ZIZ",
+                        "BYO",
+                        "NAN",
+                        "PRA",
+                        "KVN"
+                    ]
                 }
             ]
         },
         {
-            "question": "二人ペアリングを",
+            "question": "攻めは束縛するタイプ？",
             "options": [
                 {
-                    "answer": "する",
-                    "scores": {
-                        "RYG": 4,
-                        "INU": 3,
-                        "KIK": 3,
-                        "FJI": 3,
-                        "DKA": 3,
-                        "ATO": 4,
-                        "SAN": 4,
-                        "NIO": 4,
-                        "BUN": 4,
-                        "KIN": 3,
-                        "YUK": 4,
-                        "TOK": 4,
-                        "RAL": 4
-                    }
+                    "answer": "束縛する",
+                    "includedTypes": [
+                        "FJI",
+                        "YKM",
+                        "TKG",
+                        "IBU",
+                        "PRA",
+                        "KVN"
+                    ]
                 },
                 {
-                    "answer": "しない",
-                    "scores": {
-                        "RYG": 1,
-                        "INU": 2,
-                        "KIK": 2,
-                        "FJI": 2,
-                        "DKA": 2,
-                        "ATO": 1,
-                        "SAN": 1,
-                        "NIO": 1,
-                        "BUN": 1,
-                        "KIN": 2,
-                        "YUK": 1,
-                        "TOK": 1,
-                        "RAL": 1
-                    }
+                    "answer": "束縛しない",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "CAL",
+                        "BYO",
+                        "NAN",
+                        "PRA",
+                        "KVN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "二人は食の好みが",
+            "options": [
+                {
+                    "answer": "合う",
+                    "includedTypes": [
+                        "KIK",
+                        "TDK",
+                        "SND",
+                        "BUN",
+                        "YKM",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "SNG",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "TNS",
+                        "ZIZ",
+                        "CAL",
+                        "BYO",
+                        "KVN"
+                    ]
+                },
+                {
+                    "answer": "合わない",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "FJI",
+                        "ATB",
+                        "NIO",
+                        "KIN",
+                        "TKG",
+                        "RLF",
+                        "AKT",
+                        "DAN",
+                        "KNY",
+                        "SRS",
+                        "NAN",
+                        "PRA"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "攻めはリョーマを",
+            "options": [
+                {
+                    "answer": "導くタイプ",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "TDK",
+                        "TKG",
+                        "RLF",
+                        "OIS",
+                        "KWM",
+                        "SRS",
+                        "BYO",
+                        "NAN"
+                    ]
+                },
+                {
+                    "answer": "追いかけるタイプ",
+                    "includedTypes": [
+                        "KIK",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "DAN",
+                        "KRK",
+                        "HYS",
+                        "KVN"
+                    ]
+                },
+                {
+                    "answer": "ライバル視するタイプ",
+                    "includedTypes": [
+                        "FJI",
+                        "ATB",
+                        "SND",
+                        "KIN",
+                        "YKM",
+                        "MMS",
+                        "KID",
+                        "AKT",
+                        "SNG",
+                        "KRK",
+                        "AKY",
+                        "TNS",
+                        "PRA",
+                        "KVN"
+                    ]
+                },
+                {
+                    "answer": "尊敬するタイプ",
+                    "includedTypes": [
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "ATB",
+                        "NIO",
+                        "BUN",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "YTA",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "KNY",
+                        "ZIZ"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "体格差カプに萌える",
+            "options": [
+                {
+                    "answer": "はい",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "BYO",
+                        "NAN"
+                    ]
+                },
+                {
+                    "answer": "いいえ",
+                    "includedTypes": [
+                        "FJI",
+                        "BUN",
+                        "KIN",
+                        "IBU",
+                        "DAN",
+                        "KRK",
+                        "ZIZ",
+                        "CAL",
+                        "PRA",
+                        "KVN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "二人の性格は",
+            "options": [
+                {
+                    "answer": "似ている",
+                    "includedTypes": [
+                        "SND",
+                        "NIO",
+                        "TKG",
+                        "KID",
+                        "AKT",
+                        "KRK",
+                        "KNY",
+                        "ZIZ",
+                        "CAL",
+                        "BYO",
+                        "PRA",
+                        "KVN"
+                    ]
+                },
+                {
+                    "answer": "正反対",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "BUN",
+                        "KIN",
+                        "YKM",
+                        "RLF",
+                        "MMS",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "SNG",
+                        "DAN",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "TNS",
+                        "SRS",
+                        "NAN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "リョーマのことを特別な呼び方をする",
+            "options": [
+                {
+                    "answer": "はい",
+                    "includedTypes": [
+                        "RYG",
+                        "KIK",
+                        "KIN",
+                        "YKM",
+                        "AKT",
+                        "PRA"
+                    ]
+                },
+                {
+                    "answer": "いいえ",
+                    "includedTypes": [
+                        "INI",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "CAL",
+                        "BYO",
+                        "NAN",
+                        "KVN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "リョーマとの関係は",
+            "options": [
+                {
+                    "answer": "家族",
+                    "includedTypes": [
+                        "RYG",
+                        "CAL",
+                        "NAN"
+                    ]
+                },
+                {
+                    "answer": "同じ学校の先輩・後輩",
+                    "includedTypes": [
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM"
+                    ]
+                },
+                {
+                    "answer": "それ以外",
+                    "includedTypes": [
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "BYO",
+                        "PRA",
+                        "KVN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "リョーマとテニスで試合して決着がついたことが",
+            "options": [
+                {
+                    "answer": "ある",
+                    "includedTypes": [
+                        "INI",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "KID",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "KRK",
+                        "HYS",
+                        "AKY",
+                        "TNS",
+                        "NAN",
+                        "PRA",
+                        "KVN"
+                    ]
+                },
+                {
+                    "answer": "ない",
+                    "includedTypes": [
+                        "RYG",
+                        "KIK",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "OIS",
+                        "KWM",
+                        "DAN",
+                        "OSI",
+                        "KNY",
+                        "SRS",
+                        "ZIZ",
+                        "CAL",
+                        "BYO"
+                    ]
                 }
             ]
         }

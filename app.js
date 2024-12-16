@@ -1,120 +1,194 @@
 const app = Vue.createApp({
     data() {
         return {
-            questions: [], // ランダムに選ばれる質問
-            currentQuestionIndex: 0,
-            scores: {
-                RYG: 0, INU: 0, KIK: 0, FJI: 0, DKA: 0,
-                ATO: 0, SAN: 0, NIO: 0, BUN: 0, KIN: 0,
-                YUK: 0, TOK: 0, RAL: 0,
-            },
-            excludedTypes: new Set(), // スコア0の回答を選んだタイプを格納
-            selectedAnswers: [], // 各質問で選んだ回答を記録
-            typeMapping: {
-                RYG: "リョガリョ",
-                INU: "乾リョ",
-                KIK: "菊リョ",
-                FJI: "不二リョ",
-                DKA: "塚リョ",
-                ATO: "跡リョ",
-                SAN: "真リョ",
-                NIO: "仁王リョ",
-                BUN: "ブンリョ",
-                KIN: "金リョ",
-                YUK: "幸リョ",
-                TOK: "徳リョ",
-                RAL: "ラルリョ",
-            },
+            questions: [], // 質問データを格納
+            types: [],//タイプ一覧
+            currentQuestionIndex: 0, // 現在の質問
+            remainingTypes: [], // 残った診断結果候補
+            isLoading: true, // JSON読み込み中の状態
             quizFinished: false, // 診断終了フラグ
-            isLoading: true // JSON読み込み中の状態
-            
+            result: null,//結果
+            questionHistory: [],//質問の履歴
+            nowQuestionIndex: 0//今の質問数のインデックス
         };
     },
-    computed: {
-
-        resultTypeName() {
-            // すべてのタイプのスコアが0の場合は該当なし
-            if (Object.values(this.scores).every(score => score === 0)) {
-              return "該当なし";
-            }
-      
-            // 除外されたタイプを除いた結果を計算
-            const validScores = Object.entries(this.scores)
-              .filter(([type]) => !this.excludedTypes.has(type) && this.scores[type] > 0);
-      
-            // 残ったスコアの中で最大値を持つタイプを選ぶ
-            if (validScores.length === 0) {
-              return "該当なし";
-            }
-      
-            const [resultType] = validScores.reduce((maxEntry, currentEntry) =>
-              currentEntry[1] > maxEntry[1] ? currentEntry : maxEntry
-            );
-            return this.typeMapping[resultType] || "該当なし";
-          }
-    },
     methods: {
-        /**
-         * ランダムに質問を選ぶ
-         */
-        shuffleQuestions() {
-            const shuffled = [...this.questions].sort(() => Math.random() - 0.5);
-            this.questions = shuffled.slice(0, 3);
-        },
-        handleAnswer(selectedScores) {
-            // 現在の質問の回答を記録
-            this.selectedAnswers[this.currentQuestionIndex] = selectedScores;
+        loadQuestions() {
+            // JSONデータを読み込む（ここではローカルで定義）
+            fetch("question.json")
+                .then((response) => response.json())
+                .then((data) => {
+                    this.questions = data.questions;
+                    this.selectRandomQuestion(); // 最初の質問をランダムに選択
+                });
+            fetch("code.json")
+                .then((response) => response.json())
+                .then((data) => {
+                    this.types = data.types;
+                    this.remainingTypes = JSON.parse(JSON.stringify(Object.keys(this.types)))
+                    this.isLoading = false; // JSON読み込み完了
 
-            // スコアを更新
-            for (let type in selectedScores) {
-                this.scores[type] += selectedScores[type];
-                // スコアが0の回答が選ばれている場合、そのタイプを除外
-                if (selectedScores[type] === 0) {
-                    this.excludedTypes.add(type);
+                });
+        },
+        // 質問を最初からランダムに選ぶ
+        selectRandomQuestion() {
+            // 最初の質問は全ての質問の中からランダムで選ぶ
+            const randomIndex = Math.floor(Math.random() * this.questions.length);
+            this.currentQuestionIndex = randomIndex;
+
+            this.questionHistory.push(
+                {
+                    questIndex: this.currentQuestionIndex,
+                    answered: null,
+                    excludedTypes: []
                 }
+            )
+        },
+
+        // 次の質問を選ぶ
+        selectNextQuestion() {
+            // 有効な質問をフィルタリング
+            const validQuestions = this.questions.filter((question, index) => {
+                // すでに出題された質問でないことを確認
+                const isNotAsked = !this.questionHistory.some(history => history.questIndex === index);
+                if (isNotAsked) {
+                    // この質問を選んだ場合、remainingTypes が 0 になるかを事前にチェック
+                    const allIncludedTypes = question.options.flatMap(option => option.includedTypes);
+
+                    // 各選択肢を選んだ場合の remainingTypes の状態を確認
+                    const willResultInNoRemainingTypes = question.options.some(option => {
+                        const resultingTypes = this.remainingTypes.filter(type => option.includedTypes.includes(type));
+                        return resultingTypes.length === 0; // 結果的に remainingTypes が 0 になる場合
+                    });
+                    // この質問は除外する（remainingTypesが0にならない質問のみ選択）
+                    return !willResultInNoRemainingTypes;
+                }
+                return false; // すでに出題された質問を除外
+            });
+            if (validQuestions.length === 0) {
+                this.calculateResult(); // 結果を計算して終了
+                return;
             }
 
-            if (this.currentQuestionIndex < this.questions.length - 1) {
-                this.currentQuestionIndex++;
-              } else {
-                this.quizFinished = true; // 最後の質問後に結果画面へ
-              }
+            const scoredQuestions = validQuestions.map(question => ({
+                question,
+                score: this.calculateQuestionScore(question)
+            }));
+
+            // スコアが最大の質問を取得
+            const maxScore = Math.max(...scoredQuestions.map(q => q.score));
+            const bestQuestions = scoredQuestions.filter(q => q.score === maxScore);
+
+            // ランダムで1つ選ぶ
+            const selectedQuestion = bestQuestions[Math.floor(Math.random() * bestQuestions.length)].question;
+
+            this.currentQuestionIndex = this.questions.indexOf(selectedQuestion);
+
+            this.questionHistory.push(
+                {
+                    questIndex: this.currentQuestionIndex,
+                    answered: null,
+                    excludedTypes: []
+                }
+            )
+            this.nowQuestionIndex++;
         },
 
+        //質問の選択の重みを計算
+        calculateQuestionScore(question) {
+            let coverage = 0;
+            let eliminationRisk = 0;
+
+            question.options.forEach(option => {
+                const included = option.includedTypes.filter(type => this.remainingTypes.includes(type));
+                const excluded = this.remainingTypes.filter(type => !included.includes(type));
+                // カバー率: この選択肢でカバーされる remainingTypes の数
+                coverage += included.length;
+                // 排除リスク: この選択肢で remainingTypes がゼロになるリスク
+                if (excluded.length === this.remainingTypes.length) {
+                    eliminationRisk += 1;
+                }
+            });
+            // カバー率が高く、排除リスクが低い質問ほどスコアが高い
+            return coverage - eliminationRisk * 5;
+        },
+
+        handleAnswer(selectedOption) {
+            const container = document.getElementById('app');
+            container.classList.remove('slide-in-left', 'slide-in-right');
+            container.offsetWidth; // 強制的に再描画
+            container.classList.add('slide-in-right');
+
+            this.questionHistory[this.nowQuestionIndex].answered = selectedOption;
+            this.questionHistory[this.nowQuestionIndex].excludedTypes = this.remainingTypes.filter(
+                (type) => !selectedOption.includedTypes.includes(type)
+            );;
+
+            // タイプを絞り込む処理
+            if (selectedOption.answer !== "どちらともいえない") {
+                this.remainingTypes = this.remainingTypes.filter((type) =>
+                    selectedOption.includedTypes.includes(type)
+                );
+            }
+            //終了判定
+            if (this.remainingTypes.length === 1) {
+                this.calculateResult();
+            }
+            // 次の質問を選ぶ
+            this.selectNextQuestion();
+
+        },
         goBack() {
-            if (this.currentQuestionIndex > 0) {
-                // 現在の質問の回答を元にスコアをリセット
-                const previousScores = this.selectedAnswers[this.currentQuestionIndex];
-                for (let type in previousScores) {
-                    this.scores[type] -= previousScores[type];
-                    if (previousScores[type] === 0) {
-                        this.excludedTypes.delete(type);
-                    }
-                }
-                // 質問を戻る
-                this.currentQuestionIndex--;
+            const container = document.getElementById('app');
+            container.classList.remove('slide-in-right', 'slide-in-left');
+            container.offsetWidth; // 強制的に再描画
+            container.classList.add('slide-in-left');
+
+            if (this.nowQuestionIndex > 0) {
+                // 最後の質問を戻る
+                const previousQuestionIndex = this.questionHistory[this.nowQuestionIndex - 1].questIndex; // 戻る先の質問インデックス
+                this.currentQuestionIndex = previousQuestionIndex; // 戻る先の質問をセット
+
+                // 戻り先の質問で除外されたタイプを復元
+                const lastExcludedTypes = this.questionHistory[this.nowQuestionIndex - 1].excludedTypes || [];
+                this.remainingTypes = [...this.remainingTypes, ...lastExcludedTypes];
+
+                // 履歴から消す
+                this.questionHistory.pop();
+                this.nowQuestionIndex--;
+            }
+
+        },
+        calculateResult() {
+            //絞り込み結果が0件
+            if (this.remainingTypes.length === 0) {
+                this.result = "該当なし";
+                this.quizFinished = true;
+            }
+            //絞り込み結果が１件で特定されている
+            else if (this.remainingTypes.length === 1) {
+                this.result = this.types[this.remainingTypes[0]];
+                this.quizFinished = true;
+            }
+            else {
+                //絞り込み結果が複数ある場合はランダムでどれかを出す
+                this.result = this.types[this.remainingTypes[Math.floor(Math.random() * this.remainingTypes.length)]];
+                this.quizFinished = true;
             }
         },
-
         resetQuiz() {
-            this.scores = Object.fromEntries(Object.keys(this.scores).map(key => [key, 0]));
-            this.excludedTypes.clear(); // 除外されたタイプもリセット
+            // 状態をリセット
             this.currentQuestionIndex = 0;
+            this.remainingTypes = JSON.parse(JSON.stringify(this.types))
             this.quizFinished = false;
-            // this.shuffleQuestions();
-        }
+            this.questionHistory = [];//質問の履歴
+            this.nowQuestionIndex = 0;//今何問目？
+            this.loadQuestions();
+        },
     },
     mounted() {
-        // JSONファイルを非同期に読み込む
-        fetch('question.json')
-            .then(response => response.json())
-            .then(data => {
-                this.questions = data.questions;
-                // this.shuffleQuestions();
-                this.isLoading = false; // JSON読み込み完了
-            })
-            .catch(error => console.error("JSONの読み込みエラー:", error));
+        this.loadQuestions();
     }
 });
 
-app.mount('#app');
+app.mount("#app");
