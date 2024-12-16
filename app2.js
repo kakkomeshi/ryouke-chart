@@ -24,8 +24,8 @@ const app = Vue.createApp({
             fetch("code.json")
                 .then((response) => response.json())
                 .then((data) => {
-                    this.types = Object.keys(data.types);
-                    this.remainingTypes = JSON.parse(JSON.stringify(this.types))
+                    this.types = data.types;
+                    this.remainingTypes = JSON.parse(JSON.stringify(Object.keys(this.types)))
                     this.isLoading = false; // JSON読み込み完了
 
                 });
@@ -43,46 +43,84 @@ const app = Vue.createApp({
                     excludedTypes: []
                 }
             )
-            // this.nowQuestionIndex++;//何問目かを追加
         },
 
         // 次の質問を選ぶ
         selectNextQuestion() {
+            // 有効な質問をフィルタリング
             const validQuestions = this.questions.filter((question, index) => {
                 // すでに出題された質問でないことを確認
                 const isNotAsked = !this.questionHistory.some(history => history.questIndex === index);
-                // 残ったタイプに関連する質問であることを確認
-                const hasRelevantTypes = question.options.some(option =>
-                    option.includedTypes.some(type => this.remainingTypes.includes(type))
-                );
-                return isNotAsked && hasRelevantTypes;
-            });
+                if (isNotAsked) {
+                    // この質問を選んだ場合、remainingTypes が 0 になるかを事前にチェック
+                    const allIncludedTypes = question.options.flatMap(option => option.includedTypes);
 
-            //選べる質問の中からランダムで出題。ない場合は終了判定へ
-            if (validQuestions.length > 0) {
-                const randomQuestion = validQuestions[Math.floor(Math.random() * validQuestions.length)];
-                this.currentQuestionIndex = this.questions.indexOf(randomQuestion);
-            } else {
-                this.calculateResult();
+                    // 各選択肢を選んだ場合の remainingTypes の状態を確認
+                    const willResultInNoRemainingTypes = question.options.some(option => {
+                        const resultingTypes = this.remainingTypes.filter(type => option.includedTypes.includes(type));
+                        return resultingTypes.length === 0; // 結果的に remainingTypes が 0 になる場合
+                    });
+                    // この質問は除外する（remainingTypesが0にならない質問のみ選択）
+                    return !willResultInNoRemainingTypes;
+                }
+                return false; // すでに出題された質問を除外
+            });
+            if (validQuestions.length === 0) {
+                this.calculateResult(); // 結果を計算して終了
+                return;
             }
+
+            const scoredQuestions = validQuestions.map(question => ({
+                question,
+                score: this.calculateQuestionScore(question)
+            }));
+
+            // スコアが最大の質問を取得
+            const maxScore = Math.max(...scoredQuestions.map(q => q.score));
+            const bestQuestions = scoredQuestions.filter(q => q.score === maxScore);
+
+            // ランダムで1つ選ぶ
+            const selectedQuestion = bestQuestions[Math.floor(Math.random() * bestQuestions.length)].question;
+
+            this.currentQuestionIndex = this.questions.indexOf(selectedQuestion);
+
             this.questionHistory.push(
                 {
                     questIndex: this.currentQuestionIndex,
                     answered: null,
-                    // includeTypes: [],
                     excludedTypes: []
                 }
             )
-            this.nowQuestionIndex++;//何問目かを追加
+            this.nowQuestionIndex++;
         },
+
+        //質問の選択の重みを計算
+        calculateQuestionScore(question) {
+            let coverage = 0;
+            let eliminationRisk = 0;
+
+            question.options.forEach(option => {
+                const included = option.includedTypes.filter(type => this.remainingTypes.includes(type));
+                const excluded = this.remainingTypes.filter(type => !included.includes(type));
+                // カバー率: この選択肢でカバーされる remainingTypes の数
+                coverage += included.length;
+                // 排除リスク: この選択肢で remainingTypes がゼロになるリスク
+                if (excluded.length === this.remainingTypes.length) {
+                    eliminationRisk += 1;
+                }
+            });
+            // カバー率が高く、排除リスクが低い質問ほどスコアが高い
+            return coverage - eliminationRisk * 5;
+        },
+
         handleAnswer(selectedOption) {
             const container = document.getElementById('app');
             container.classList.remove('slide-in-left', 'slide-in-right');
             container.offsetWidth; // 強制的に再描画
             container.classList.add('slide-in-right');
 
-            this.questionHistory[this.nowQuestionIndex ].answered = selectedOption;
-            this.questionHistory[this.nowQuestionIndex ].excludedTypes = this.remainingTypes.filter(
+            this.questionHistory[this.nowQuestionIndex].answered = selectedOption;
+            this.questionHistory[this.nowQuestionIndex].excludedTypes = this.remainingTypes.filter(
                 (type) => !selectedOption.includedTypes.includes(type)
             );;
 
@@ -93,7 +131,9 @@ const app = Vue.createApp({
                 );
             }
             //終了判定
-            this.calculateResult();
+            if (this.remainingTypes.length === 1) {
+                this.calculateResult();
+            }
             // 次の質問を選ぶ
             this.selectNextQuestion();
 
@@ -126,27 +166,14 @@ const app = Vue.createApp({
                 this.quizFinished = true;
             }
             //絞り込み結果が１件で特定されている
-            if (this.remainingTypes.length === 1) {
-                this.result = this.remainingTypes[0];
+            else if (this.remainingTypes.length === 1) {
+                this.result = this.types[this.remainingTypes[0]];
                 this.quizFinished = true;
             }
-            //現在の質問数が全質問数に到達している
-            if (this.nowQuestionIndex === this.questions.length) {
-                //絞り込み結果が0件
-                if (this.remainingTypes.length === 0) {
-                    this.result = "該当なし";
-                    this.quizFinished = true;
-                }
-                //絞り込み結果が１件で特定されている
-                else if (this.remainingTypes.length === 1) {
-                    this.result = this.remainingTypes[0];
-                    this.quizFinished = true;
-                }
-                else {
-                    //絞り込み結果が複数ある
-                    this.result = this.remainingTypes;
-                    this.quizFinished = true;
-                }
+            else {
+                //絞り込み結果が複数ある場合はランダムでどれかを出す
+                this.result = this.types[this.remainingTypes[Math.floor(Math.random() * this.remainingTypes.length)]];
+                this.quizFinished = true;
             }
         },
         resetQuiz() {
