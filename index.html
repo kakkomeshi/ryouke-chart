@@ -12,27 +12,30 @@
 </head>
 
 <body>
-    <div id="app">
+    <div class="content-main" id="app">
         <!-- 診断の説明画面 -->
         <div v-if="!quizStarted" class="intro-screen">
             <div class="content-box">
                 <h2>おすすめリョ受けカプ診断</h2>
+                <!-- <p>あなたにぴったりのリョ受けカプを診断します！<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p> -->
                 <p>あなたにぴったりのリョ受けカプを診断します！</p>
                 <p>（ジョークアプリです。様々なリョーマ受けのカップリングが結果に出てきますので苦手なカップリングが有る方はご注意ください。）</p>
-                <p>不具合・要望等がある場合は<br> <a target="_tab" href="https://docs.google.com/forms/d/e/1FAIpQLSeXGCF228j5CK3N-SBw1yPcwTFI5If3i-3aSPjQOWL_7GvVqw/viewform">こちら</a>のフォームからご報告ください。</p>
+                <p>不具合・要望等がある場合は<br> <a target="_tab"
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSeXGCF228j5CK3N-SBw1yPcwTFI5If3i-3aSPjQOWL_7GvVqw/viewform">こちら</a>のフォームからご報告ください。
+                </p>
                 <button @click="startQuiz" class="start-button">診断スタート</button>
             </div>
         </div>
 
         <!-- ローディング画面 -->
-        <div v-if="isLoading && quizStarted">
+        <div v-if="isLoading && quizStarted" class="intro-screen">
             <div class="content-box">
                 <p>読み込み中...</p>
             </div>
         </div>
 
         <!-- 質問画面 -->
-        <div v-else-if="!quizFinished && quizStarted">
+        <div v-else-if="!quizFinished && quizStarted"class="intro-screen">
             <div class="content-box">
                 <p>{{ questions[currentQuestionIndex].question }}</p>
                 <div class="options">
@@ -50,8 +53,8 @@
         </div>
 
         <!-- 結果画面 -->
-        <div v-if="quizFinished">
-            <div class="content-box">
+        <div v-if="quizFinished" class="intro-screen">
+            <div class="content-box" >
                 <h2>あなたへのおすすめリョ受けカプは・・・</h2>
                 <p :style="{ backgroundColor: captions[resultTypeCode].bgColor }" class="resultCaplingText">{{ result }}
                 </p>
