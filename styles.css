@@ -4,7 +4,7 @@ html {
   background-color: #4a6ed9;
   font-family: "M PLUS Rounded 1c";
   margin: 0;
-  height: 100vh;
+  height: 100％;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,8 +12,6 @@ html {
 
 /* コンテンツの中央揃え */
 #app {
-  /* height: 100vh; */
-  /* width: 100vh; */
   align-items: center;
   display: flex;
   justify-content: center;
@@ -55,12 +53,14 @@ html {
   /* flex-direction: column; */
   /* text-align: center;  */
   /* padding-top: 100px; */
+  padding-top: 10px;
   /* padding: 10px 0 10px 0; */
 }
 
 
 /* 質問画面のスタイル */
 .question-screen {
+  padding-top: 10px;
   display: flex;
   justify-content: center;
   /* padding-top: 100px; */
@@ -68,10 +68,10 @@ html {
 
 /* 結果画面のスタイル */
 .result-screen {
+  padding-top: 10px;
   display: flex;
   justify-content: center;
-  padding-top: 300px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 
 
@@ -186,9 +186,10 @@ button.back-button:disabled {
 /* レスポンシブデザイン: スマホ用 */
 @media screen and (max-width: 600px) {
   .content-box {
-    width:80%;
+    width: 80%;
     min-width: 300px;
   }
+
   #app {
     padding-top: 50px;
     /* background-color: rgb(255, 159, 64); */
@@ -228,8 +229,8 @@ button.back-button:disabled {
 }
 
 .responsive-img {
-  width: 100%;       
-  height: auto;     
-  max-width: 300px;    
+  width: 100%;
+  height: auto;
+  max-width: 300px;
   object-fit: contain;
 }
