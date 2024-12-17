@@ -216,7 +216,7 @@ const app = Vue.createApp({
 
         shareOnTwitter() {
             const baseUrl = "https://twitter.com/intent/tweet";
-            const text = `【リョ受けカプ診断】あなたへのおすすめリョ受けカプは: ${this.result} #生意気なHERO`; // ツイートの内容
+            const text = `【リョ受けカプ診断】あなたへのおすすめリョ受けカプは:『${this.result}』 #リョ受けカプ診断`; // ツイートの内容
             const url = encodeURIComponent(window.location.href); // ページのURL
             const tweetUrl = `${baseUrl}?text=${encodeURIComponent(text)}&url=${url}`;
 
