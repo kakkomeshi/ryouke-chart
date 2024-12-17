@@ -4,7 +4,7 @@ html {
   background-color: #4a6ed9;
   font-family: "M PLUS Rounded 1c";
   margin: 0;
-  /* height: 100vh; */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@ html {
 
 /* コンテンツの中央揃え */
 #app {
-  height: 100vh;
+  /* height: 100vh; */
   /* width: 100vh; */
   align-items: center;
   display: flex;
@@ -70,7 +70,7 @@ html {
 .result-screen {
   display: flex;
   justify-content: center;
-  padding-top: 250px;
+  padding-top: 300px;
   padding-bottom: 50px;
 }
 
@@ -195,7 +195,7 @@ button.back-button:disabled {
   }
 
   .button {
-    padding: 20px 20px;
+    padding: 11px 16px;
     /* ボタンサイズを調整 */
   }
 
