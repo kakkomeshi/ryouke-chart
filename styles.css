@@ -2,24 +2,22 @@
 body,
 html {
   background-color: #4a6ed9;
-  /* 青 */
   font-family: "M PLUS Rounded 1c";
   margin: 0;
   /* height: 100vh; */
   display: flex;
   justify-content: center;
-  /* 横方向の中央配置 */
   align-items: center;
 }
 
 /* コンテンツの中央揃え */
 #app {
-  /* height: 100vh; */
-  width: 100vh;
+  height: 100vh;
+  /* width: 100vh; */
   align-items: center;
   display: flex;
   justify-content: center;
-  padding: 10px 0 20px 0;
+  padding: 20px 0 20px 0;
   /* background-color: rgb(255, 75, 75); */
 }
 
@@ -32,8 +30,9 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   /* 固定幅 */
   width: 500px;
+  /* width: 90%; */
   /* スマホ対応 */
-  max-width: 90%;
+  /* max-width: 90%; */
   /* 内側の余白 */
   padding: 20px;
   /* テキスト中央揃え */
@@ -47,17 +46,34 @@ html {
 /* 診断の説明画面のスタイル */
 .intro-screen {
   /* height: 100%; */
-  max-width: 90%;
-  min-height: 100vh;
+  /* max-width: 90%; */
+  /* min-height: 100vh; */
   /* background-color: rgb(191, 255, 0); */
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  /* padding: 10px; */
+  /* align-items: center; */
+  /* flex-direction: column; */
+  /* text-align: center;  */
+  /* padding-top: 100px; */
   /* padding: 10px 0 10px 0; */
 }
+
+
+/* 質問画面のスタイル */
+.question-screen {
+  display: flex;
+  justify-content: center;
+  /* padding-top: 100px; */
+}
+
+/* 結果画面のスタイル */
+.result-screen {
+  display: flex;
+  justify-content: center;
+  padding-top: 250px;
+  padding-bottom: 50px;
+}
+
 
 /* 診断スタートボタンのスタイル */
 .start-button {
@@ -74,7 +90,6 @@ html {
 .start-button:hover {
   background-color: #45a049;
 }
-
 
 /* 質問部分のスタイル */
 p {
@@ -171,29 +186,21 @@ button.back-button:disabled {
 /* レスポンシブデザイン: スマホ用 */
 @media screen and (max-width: 600px) {
   .content-box {
-    min-width: 180px;
-    max-width: 90%;
-    padding: 15px;
+    width:80%;
+    min-width: 300px;
   }
   #app {
-    width: 90%;
-    min-width:100px;
-    padding-top: 15px
-  }
-
-  .intro-screen {
-    min-width: 150px;
-    width: 90%;
-    /* background-color: rgb(87, 163, 147); */
+    padding-top: 50px;
+    /* background-color: rgb(255, 159, 64); */
   }
 
   .button {
-    padding: 8px 16px;
+    padding: 20px 20px;
     /* ボタンサイズを調整 */
   }
 
   .start-button {
-    padding: 10px 18px;
+    padding: 20px 20px;
     /* スタートボタンも少し調整 */
   }
 }
