@@ -137,8 +137,8 @@ const app = Vue.createApp({
             container.offsetWidth; // 強制的に再描画
             container.classList.add('slide-in-right');
 
-            this.questionHistory[this.nowQuestionIndex].answered = selectedOption;
-            this.questionHistory[this.nowQuestionIndex].excludedTypes = this.remainingTypes.filter(
+            this.questionHistory[this.nowQuestionIndex+1].answered = selectedOption;
+            this.questionHistory[this.nowQuestionIndex+1].excludedTypes = this.remainingTypes.filter(
                 (type) => !selectedOption.includedTypes.includes(type)
             );;
 
@@ -164,11 +164,11 @@ const app = Vue.createApp({
 
             if (this.nowQuestionIndex > 0) {
                 // 最後の質問を戻る
-                const previousQuestionIndex = this.questionHistory[this.nowQuestionIndex - 1].questIndex; // 戻る先の質問インデックス
+                const previousQuestionIndex = this.questionHistory[this.nowQuestionIndex ].questIndex; // 戻る先の質問インデックス
                 this.currentQuestionIndex = previousQuestionIndex; // 戻る先の質問をセット
 
                 // 戻り先の質問で除外されたタイプを復元
-                const lastExcludedTypes = this.questionHistory[this.nowQuestionIndex - 1].excludedTypes || [];
+                const lastExcludedTypes = this.questionHistory[this.nowQuestionIndex ].excludedTypes || [];
                 this.remainingTypes = [...this.remainingTypes, ...lastExcludedTypes];
 
                 // 履歴から消す
