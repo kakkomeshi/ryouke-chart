@@ -697,6 +697,9 @@
                         "RYG",
                         "INI",
                         "TDK",
+                        "ATB",
+                        "SND",
+                        "YKM",
                         "TKG",
                         "RLF",
                         "OIS",
@@ -710,6 +713,7 @@
                     "answer": "追いかけるタイプ",
                     "includedTypes": [
                         "KIK",
+                        "FJI",
                         "IBU",
                         "YTA",
                         "AKT",
@@ -861,7 +865,7 @@
             ]
         },
         {
-            "question": "リョーマのことを特別な呼び方をする",
+            "question": "リョーマのことを特別な呼び方をする？",
             "options": [
                 {
                     "answer": "はい",
@@ -911,7 +915,7 @@
             ]
         },
         {
-            "question": "リョーマとの関係は",
+            "question": "リョーマとの関係は？",
             "options": [
                 {
                     "answer": "家族",
@@ -965,10 +969,10 @@
             ]
         },
         {
-            "question": "リョーマとテニスで試合して決着がついたことが",
+            "question": "リョーマとの試合に勝敗がついてる攻めがいい",
             "options": [
                 {
-                    "answer": "ある",
+                    "answer": "はい",
                     "includedTypes": [
                         "INI",
                         "FJI",
@@ -993,7 +997,7 @@
                     ]
                 },
                 {
-                    "answer": "ない",
+                    "answer": "いいえ",
                     "includedTypes": [
                         "RYG",
                         "KIK",
@@ -1012,6 +1016,117 @@
                         "ZIZ",
                         "CAL",
                         "BYO"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "運命カプが好き",
+            "options": [
+                {
+                    "answer": "はい",
+                    "includedTypes": [
+                        "RYG",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "KIN",
+                        "YKM",
+                        "TKG",
+                        "AKY",
+                        "CAL",
+                        "PRA"
+                    ]
+                },
+                {
+                    "answer": "いいえ",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "AKT",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "AKY",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "CAL",
+                        "BYO",
+                        "NAN",
+                        "PRA",
+                        "KVN"
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "バイオレンスなカプが好き",
+            "options": [
+                {
+                    "answer": "ある",
+                    "includedTypes": [
+                        "AKT",
+                        "AKY",
+                        "BYO"
+                    ]
+                },
+                {
+                    "answer": "ない",
+                    "includedTypes": [
+                        "RYG",
+                        "INI",
+                        "KIK",
+                        "FJI",
+                        "TDK",
+                        "ATB",
+                        "SND",
+                        "NIO",
+                        "BUN",
+                        "KIN",
+                        "YKM",
+                        "TKG",
+                        "RLF",
+                        "MMS",
+                        "KID",
+                        "OIS",
+                        "KWM",
+                        "IBU",
+                        "YTA",
+                        "SNG",
+                        "DAN",
+                        "KRK",
+                        "OSI",
+                        "HYS",
+                        "KNY",
+                        "TNS",
+                        "SRS",
+                        "ZIZ",
+                        "CAL",
+                        "NAN",
+                        "PRA",
+                        "KVN"
                     ]
                 }
             ]
