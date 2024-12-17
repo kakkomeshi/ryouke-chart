@@ -35,7 +35,7 @@
         </div>
 
         <!-- 質問画面 -->
-        <div v-else-if="!quizFinished && quizStarted"class="question-screen">
+        <div v-else-if="!quizFinished && quizStarted" class="question-screen">
             <div class="content-box">
                 <p>{{ questions[currentQuestionIndex].question }}</p>
                 <div class="options">
@@ -54,11 +54,11 @@
 
         <!-- 結果画面 -->
         <div v-if="quizFinished" class="result-screen">
-            <div class="content-box" >
+            <div class="content-box">
                 <h2>あなたへのおすすめリョ受けカプは・・・</h2>
                 <p :style="{ backgroundColor: captions[resultTypeCode].bgColor }" class="resultCaplingText">{{ result }}
                 </p>
-                <p><img :src="'img/' + resultTypeCode + '.png'" width="300px" :alt="result"></p>
+                <p><img class="responsive-img" :src="'img/' + resultTypeCode + '.png'" width="300px" :alt="result"></p>
                 <!-- キャプション -->
                 <p>{{captions[resultTypeCode]?.caption}}</p>
                 <p>{{captions[resultTypeCode]?.recommendStory}}

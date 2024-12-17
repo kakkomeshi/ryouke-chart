@@ -226,3 +226,10 @@ button.back-button:disabled {
   transform: scale(1.05);
   /* 拡大 */
 }
+
+.responsive-img {
+  width: 100%;       
+  height: auto;     
+  max-width: 300px;    
+  object-fit: contain;
+}
