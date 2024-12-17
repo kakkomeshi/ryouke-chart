@@ -246,6 +246,7 @@ button.back-button:disabled {
   bottom: 0;
   font-size: 10px;
   position: fixed;
+  z-index: -10;
 }
 
 
