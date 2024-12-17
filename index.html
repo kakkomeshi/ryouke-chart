@@ -52,7 +52,7 @@
         <div class="content-box">
             <h2>あなたへのおすすめリョ受けカプは・・・</h2>
             <p   :style="{ backgroundColor: captions[resultTypeCode].bgColor }" class="resultCaplingText">{{ result }}</p>
-            <p><img :src="'/img/' + resultTypeCode + '.png'" width="300px" :alt="result"></p>
+            <p><img :src="'img/' + resultTypeCode + '.png'" width="300px" :alt="result"></p>
              <!-- キャプション -->
          <p>{{captions[resultTypeCode]?.caption}}</p>
             <p>{{captions[resultTypeCode]?.recommendStory}}
