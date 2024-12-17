@@ -2,7 +2,8 @@
 body,
 html {
   background-color: #4a6ed9; /* 青 */
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
+  font-family: "M PLUS Rounded 1c";
   margin: 0;
   height: 100vh;
   display: flex;
@@ -140,6 +141,18 @@ button.back-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+.resultCaplingText{
+  font-family: "M PLUS Rounded 1c";
+  /* background-color: #2f48ff; 背景色をピンクに */
+  color: #ffffff; /* 文字色を濃いピンクに */
+  padding: 5px 10px; /* テキスト周りの余白 */
+  border-radius: 8px; /* 背景を角丸に */
+  font-size: 2rem; /* 文字サイズを調整 */
+  display: inline-block; /* インライン要素の装飾用 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影をつける */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* アニメーション効果 */
+
+}
 
 /* レスポンシブデザイン: スマホ用 */
 @media screen and (max-width: 600px) {
@@ -156,4 +169,22 @@ button.back-button:disabled {
   .start-button {
       padding: 10px 18px; /* スタートボタンも少し調整 */
   }
+}
+/* ツイートボタンのスタイル */
+.tweet-button {
+  background-color: #1da1f2; /* Twitterブルー */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.tweet-button:hover {
+  background-color: #0d8de1; /* 少し濃いブルーに */
+  transform: scale(1.05); /* 拡大 */
 }

@@ -3,11 +3,13 @@ const app = Vue.createApp({
         return {
             questions: [], // 質問データを格納
             types: [],//タイプ一覧
+            captions: [],//結果の文章
             currentQuestionIndex: 0, // 現在の質問
             remainingTypes: [], // 残った診断結果候補
             isLoading: true, // JSON読み込み中の状態
             quizFinished: false, // 診断終了フラグ
             result: null,//結果
+            resultTypeCode: null,//結果のタイプコード
             questionHistory: [],//質問の履歴
             nowQuestionIndex: 0,//今の質問数のインデックス
             quizStarted: false, // 診断が開始されたかどうかのフラグ
@@ -36,8 +38,14 @@ const app = Vue.createApp({
                 .then((data) => {
                     this.types = data.types;
                     this.remainingTypes = JSON.parse(JSON.stringify(Object.keys(this.types)))
-                    this.isLoading = false; // JSON読み込み完了
+                    // this.isLoading = false; // JSON読み込み完了
 
+                });
+            fetch("captions.json")
+                .then((response) => response.json())
+                .then((data) => {
+                    this.captions = data.captions;
+                    this.isLoading = false; // JSON読み込み完了
                 });
         },
         // 質問を最初からランダムに選ぶ
@@ -172,17 +180,20 @@ const app = Vue.createApp({
         calculateResult() {
             //絞り込み結果が0件
             if (this.remainingTypes.length === 0) {
+                this.resultTypeCode = null;
                 this.result = "該当なし";
                 this.quizFinished = true;
             }
             //絞り込み結果が１件で特定されている
             else if (this.remainingTypes.length === 1) {
-                this.result = this.types[this.remainingTypes[0]];
+                this.resultTypeCode = this.remainingTypes[0];
+                this.result = this.types[this.resultTypeCode];
                 this.quizFinished = true;
             }
             else {
                 //絞り込み結果が複数ある場合はランダムでどれかを出す
-                this.result = this.types[this.remainingTypes[Math.floor(Math.random() * this.remainingTypes.length)]];
+                this.resultTypeCode = this.remainingTypes[Math.floor(Math.random() * this.remainingTypes.length)];
+                this.result = this.types[this.resultTypeCode];
                 this.quizFinished = true;
             }
         },
@@ -194,16 +205,28 @@ const app = Vue.createApp({
             // 状態をリセット
             this.currentQuestionIndex = 0;
             this.remainingTypes = JSON.parse(JSON.stringify(this.types))
+            this.result = null;
+            this.resultTypeCode = null;
             this.quizFinished = false;
-            this.quizStarted = false; 
+            this.quizStarted = false;
             this.questionHistory = [];//質問の履歴
             this.nowQuestionIndex = 0;//今何問目？
             this.loadQuestions();
         },
+
+        shareOnTwitter() {
+            const baseUrl = "https://twitter.com/intent/tweet";
+            const text = `【リョ受けカプ診断】あなたへのおすすめリョ受けカプは: ${this.result} #生意気なHERO`; // ツイートの内容
+            const url = encodeURIComponent(window.location.href); // ページのURL
+            const tweetUrl = `${baseUrl}?text=${encodeURIComponent(text)}&url=${url}`;
+
+            window.open(tweetUrl, "_blank"); // 別タブでツイート画面を開く
+        }
+
     },
     mounted() {
         // this.quizStarted = true; // 診断をスタート
-        // this.loadQuestions();
+        this.loadQuestions();
     }
 });
 
