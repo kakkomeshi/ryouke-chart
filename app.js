@@ -13,39 +13,63 @@ const app = Vue.createApp({
             questionHistory: [],//質問の履歴
             nowQuestionIndex: 0,//今の質問数のインデックス
             quizStarted: false, // 診断が開始されたかどうかのフラグ
+            APIURL: "https://script.google.com/macros/s/AKfycbxUVBvlse7rJWYvLlp2w1UkDmGxuyydXPW3Sw_pr2lQgnAlbcDy6oK1udA36lpJViHw/exec"
         };
     },
     methods: {
-        startQuiz() {
+        async startQuiz() {
             const container = document.getElementById('app');
             container.classList.remove('slide-in-left', 'slide-in-right');
             container.offsetWidth; // 強制的に再描画
             container.classList.add('slide-in-right');
 
             this.quizStarted = true; // 診断をスタート
-            this.loadQuestions(); // 質問をロード
+            // this.loadQuestions(); // 質問をロード
+            await this.resetRemainingTypes()
+            await this.selectRandomQuestion(); // 最初の質問をランダムに選択
+        },
+        resetRemainingTypes() {
+            this.remainingTypes = JSON.parse(JSON.stringify(Object.keys(this.types)))
         },
         loadQuestions() {
-            // JSONデータを読み込む（ここではローカルで定義）
-            fetch("question.json")
-                .then((response) => response.json())
-                .then((data) => {
-                    this.questions = data.questions;
-                    this.selectRandomQuestion(); // 最初の質問をランダムに選択
-                });
-            fetch("code.json")
-                .then((response) => response.json())
-                .then((data) => {
-                    this.types = data.types;
-                    this.remainingTypes = JSON.parse(JSON.stringify(Object.keys(this.types)))
-                    // this.isLoading = false; // JSON読み込み完了
+            // これは画面マウント時のみ実行する
+            Promise.all([
+                fetch(this.APIURL + '?type=question')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.questions = data.questions;
+                        console.log('Questions data received:', data);
+                    }),
 
-                });
-            fetch("captions.json")
-                .then((response) => response.json())
-                .then((data) => {
-                    this.captions = data.captions;
-                    this.isLoading = false; // JSON読み込み完了
+                fetch(this.APIURL + '?type=caption')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.captions = data.captions;
+                        console.log('Captions data received:', data);
+                    }),
+                fetch("code.json")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.types = data.types;
+                        this.remainingTypes = JSON.parse(JSON.stringify(Object.keys(this.types)))
+                    })
+            ])
+                .then(() => {
+                    this.isLoading = false; // 全てのリクエストが完了した後
+                    console.log('All data loaded.');
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operations:', error);
                 });
         },
         // 質問を最初からランダムに選ぶ
@@ -132,13 +156,8 @@ const app = Vue.createApp({
         },
 
         handleAnswer(selectedOption) {
-            const container = document.getElementById('app');
-            container.classList.remove('slide-in-left', 'slide-in-right');
-            container.offsetWidth; // 強制的に再描画
-            container.classList.add('slide-in-right');
-
-            this.questionHistory[this.nowQuestionIndex+1].answered = selectedOption;
-            this.questionHistory[this.nowQuestionIndex+1].excludedTypes = this.remainingTypes.filter(
+            this.questionHistory[this.nowQuestionIndex].answered = selectedOption;
+            this.questionHistory[this.nowQuestionIndex].excludedTypes = this.remainingTypes.filter(
                 (type) => !selectedOption.includedTypes.includes(type)
             );;
 
@@ -155,27 +174,30 @@ const app = Vue.createApp({
             // 次の質問を選ぶ
             this.selectNextQuestion();
 
+            const container = document.getElementById('app');
+            container.classList.remove('slide-in-left', 'slide-in-right');
+            container.offsetWidth; // 強制的に再描画
+            container.classList.add('slide-in-right');
+
         },
         goBack() {
-            const container = document.getElementById('app');
-            container.classList.remove('slide-in-right', 'slide-in-left');
-            container.offsetWidth; // 強制的に再描画
-            container.classList.add('slide-in-left');
-
             if (this.nowQuestionIndex > 0) {
                 // 最後の質問を戻る
-                const previousQuestionIndex = this.questionHistory[this.nowQuestionIndex ].questIndex; // 戻る先の質問インデックス
+                const previousQuestionIndex = this.questionHistory[this.nowQuestionIndex-1].questIndex; // 戻る先の質問インデックス
                 this.currentQuestionIndex = previousQuestionIndex; // 戻る先の質問をセット
 
                 // 戻り先の質問で除外されたタイプを復元
-                const lastExcludedTypes = this.questionHistory[this.nowQuestionIndex ].excludedTypes || [];
+                const lastExcludedTypes = this.questionHistory[this.nowQuestionIndex-1].excludedTypes || [];
                 this.remainingTypes = [...this.remainingTypes, ...lastExcludedTypes];
 
                 // 履歴から消す
                 this.questionHistory.pop();
                 this.nowQuestionIndex--;
             }
-
+            const container = document.getElementById('app');
+            container.classList.remove('slide-in-right', 'slide-in-left');
+            container.offsetWidth; // 強制的に再描画
+            container.classList.add('slide-in-left');
         },
         calculateResult() {
             //絞り込み結果が0件
@@ -198,10 +220,6 @@ const app = Vue.createApp({
             }
         },
         resetQuiz() {
-            // const container = document.getElementById('app');
-            // container.classList.remove('slide-in-right', 'slide-in-left');
-            // container.offsetWidth; // 強制的に再描画
-            // container.classList.add('slide-in-left');
             // 状態をリセット
             this.currentQuestionIndex = 0;
             this.remainingTypes = JSON.parse(JSON.stringify(this.types))
@@ -211,7 +229,6 @@ const app = Vue.createApp({
             this.quizStarted = false;
             this.questionHistory = [];//質問の履歴
             this.nowQuestionIndex = 0;//今何問目？
-            this.loadQuestions();
         },
 
         shareOnTwitter() {
