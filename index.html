@@ -14,8 +14,15 @@
 
 <body>
     <div id="app">
+        <!-- ローディング画面 -->
+        <div v-if="isLoading && quizStarted" class="intro-screen">
+            <div class="content-box">
+                <p>読み込み中...</p>
+                <div class="donutSpinner"></div>
+            </div>
+        </div>
         <!-- 診断の説明画面 -->
-        <div v-if="!quizStarted" class="intro-screen">
+        <div v-if="!isLoading && !quizStarted" class="intro-screen">
             <div class="content-box">
                 <h2>おすすめリョ受けカプ診断（β版）</h2>
                 <p>あなたにぴったりのリョ受けカプを診断します！</p>
@@ -30,15 +37,6 @@
                 <button @click="startQuiz" class="start-button">診断スタート</button>
             </div>
         </div>
-
-        <!-- ローディング画面 -->
-        <div v-if="isLoading && quizStarted" class="intro-screen">
-            <div class="content-box">
-                <p>読み込み中...</p>
-                <div class="donutSpinner"></div>
-            </div>
-        </div>
-
         <!-- 質問画面 -->
         <div v-else-if="!quizFinished && quizStarted" class="question-screen">
             <div class="content-box">

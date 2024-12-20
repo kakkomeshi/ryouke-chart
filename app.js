@@ -13,7 +13,7 @@ const app = Vue.createApp({
             questionHistory: [],//質問の履歴
             nowQuestionIndex: 0,//今の質問数のインデックス
             quizStarted: false, // 診断が開始されたかどうかのフラグ
-            APIURL: "https://script.google.com/macros/s/AKfycbxUVBvlse7rJWYvLlp2w1UkDmGxuyydXPW3Sw_pr2lQgnAlbcDy6oK1udA36lpJViHw/exec"
+            API_URL: "https://script.google.com/macros/s/AKfycbxUVBvlse7rJWYvLlp2w1UkDmGxuyydXPW3Sw_pr2lQgnAlbcDy6oK1udA36lpJViHw/exec"
         };
     },
     methods: {
@@ -32,45 +32,69 @@ const app = Vue.createApp({
             this.remainingTypes = JSON.parse(JSON.stringify(Object.keys(this.types)))
         },
         loadQuestions() {
+            // キャッシュからの読み込み
+            const questionData = sessionStorage.getItem('questionData');
+            const captionData = sessionStorage.getItem('captionData');
             // これは画面マウント時のみ実行する
-            Promise.all([
-                fetch(this.APIURL + '?type=question')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        this.questions = data.questions;
-                        console.log('Questions data received:', data);
-                    }),
+            // キャッシュが存在する場合
+            if (questionData && captionData) {
+                // 即座にローディング完了処理を行う
+                this.isLoading = false;
+                return;
+            }
 
-                fetch(this.APIURL + '?type=caption')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        this.captions = data.captions;
-                        console.log('Captions data received:', data);
-                    }),
+            // キャッシュがない場合、リクエストを並列に実行
+            Promise.all([
+                questionData ?
+                    Promise.resolve(JSON.parse(questionData)) :
+                    fetch(`${this.API_URL}?type=question`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            sessionStorage.setItem('questionData', JSON.stringify(data)); // データをキャッシュ
+                            return data.questions;
+                        }),
+
+                captionData ?
+                    Promise.resolve(JSON.parse(captionData)) :
+                    fetch(`${this.API_URL}?type=caption`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            sessionStorage.setItem('captionData', JSON.stringify(data)); // データをキャッシュ
+                            return data.captions;
+                        }),
+
                 fetch("code.json")
-                    .then((response) => response.json())
-                    .then((data) => {
+                    .then(response => response.json())
+                    .then(data => {
+                        // 取得したtypesをthisに格納
                         this.types = data.types;
-                        this.remainingTypes = JSON.parse(JSON.stringify(Object.keys(this.types)))
+                        // remainingTypesにtypesのキーを格納
+                        this.remainingTypes = Object.keys(this.types);
                     })
             ])
-                .then(() => {
-                    this.isLoading = false; // 全てのリクエストが完了した後
+                .then(([questionData, captionData, codeData]) => {
+                    // 質問データとキャプションデータをthisに格納
+                    this.questions = questionData;
+                    this.captions = captionData;
+
+                    // ローディング完了の処理
+                    this.isLoading = false;
                     console.log('All data loaded.');
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operations:', error);
                 });
+
         },
         // 質問を最初からランダムに選ぶ
         selectRandomQuestion() {
@@ -183,11 +207,11 @@ const app = Vue.createApp({
         goBack() {
             if (this.nowQuestionIndex > 0) {
                 // 最後の質問を戻る
-                const previousQuestionIndex = this.questionHistory[this.nowQuestionIndex-1].questIndex; // 戻る先の質問インデックス
+                const previousQuestionIndex = this.questionHistory[this.nowQuestionIndex - 1].questIndex; // 戻る先の質問インデックス
                 this.currentQuestionIndex = previousQuestionIndex; // 戻る先の質問をセット
 
                 // 戻り先の質問で除外されたタイプを復元
-                const lastExcludedTypes = this.questionHistory[this.nowQuestionIndex-1].excludedTypes || [];
+                const lastExcludedTypes = this.questionHistory[this.nowQuestionIndex - 1].excludedTypes || [];
                 this.remainingTypes = [...this.remainingTypes, ...lastExcludedTypes];
 
                 // 履歴から消す
