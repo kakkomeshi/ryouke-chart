@@ -39,6 +39,8 @@ const app = Vue.createApp({
             // キャッシュが存在する場合
             if (questionData && captionData) {
                 // 即座にローディング完了処理を行う
+                this.questions = questionData;
+                this.captions = captionData;
                 this.isLoading = false;
                 return;
             }
@@ -55,7 +57,7 @@ const app = Vue.createApp({
                             return response.json();
                         })
                         .then(data => {
-                            sessionStorage.setItem('questionData', JSON.stringify(data)); // データをキャッシュ
+                            sessionStorage.setItem('questionData', data.questions); // データをキャッシュ
                             return data.questions;
                         }),
 
@@ -69,7 +71,7 @@ const app = Vue.createApp({
                             return response.json();
                         })
                         .then(data => {
-                            sessionStorage.setItem('captionData', JSON.stringify(data)); // データをキャッシュ
+                            sessionStorage.setItem('captionData', data.captions); // データをキャッシュ
                             return data.captions;
                         }),
 

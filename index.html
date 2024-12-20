@@ -63,9 +63,10 @@
                 </p>
                 <p><img class="responsive-img" :src="'img/' + resultTypeCode + '.png'" width="300px" :alt="result"></p>
                 <!-- キャプション -->
-                <p>おすすめポイント：{{captions[resultTypeCode]?.caption}}</p>
+                <p v-if="captions[resultTypeCode]?.caption">おすすめポイント：{{captions[resultTypeCode]?.caption}}</p>
 
-                <p>おすすめコンテンツ：{{captions[resultTypeCode]?.recommendStory}}
+                <p v-if="captions[resultTypeCode]?.recommendStory">
+                    おすすめコンテンツ：{{captions[resultTypeCode]?.recommendStory}}
                 </p>
                 <!-- ツイッター共有ボタン -->
                 <button class="tweet-button" @click="shareOnTwitter">
