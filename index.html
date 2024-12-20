@@ -35,6 +35,7 @@
         <div v-if="isLoading && quizStarted" class="intro-screen">
             <div class="content-box">
                 <p>読み込み中...</p>
+                <div class="donutSpinner"></div>
             </div>
         </div>
 
@@ -64,8 +65,9 @@
                 </p>
                 <p><img class="responsive-img" :src="'img/' + resultTypeCode + '.png'" width="300px" :alt="result"></p>
                 <!-- キャプション -->
-                <p>{{captions[resultTypeCode]?.caption}}</p>
-                <p>{{captions[resultTypeCode]?.recommendStory}}
+                <p>おすすめポイント：{{captions[resultTypeCode]?.caption}}</p>
+
+                <p>おすすめコンテンツ：{{captions[resultTypeCode]?.recommendStory}}
                 </p>
                 <!-- ツイッター共有ボタン -->
                 <button class="tweet-button" @click="shareOnTwitter">
