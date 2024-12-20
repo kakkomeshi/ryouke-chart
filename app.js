@@ -35,12 +35,14 @@ const app = Vue.createApp({
             // キャッシュからの読み込み
             const questionData = sessionStorage.getItem('questionData');
             const captionData = sessionStorage.getItem('captionData');
+            const typeData = sessionStorage.getItem('typeData');
             // これは画面マウント時のみ実行する
             // キャッシュが存在する場合
             if (questionData && captionData) {
                 // 即座にローディング完了処理を行う
-                this.questions = questionData;
-                this.captions = captionData;
+                this.questions = JSON.parse(questionData);
+                this.captions = JSON.parse(captionData);
+                this.types=JSON.parse(typeData);
                 this.isLoading = false;
                 return;
             }
@@ -57,7 +59,7 @@ const app = Vue.createApp({
                             return response.json();
                         })
                         .then(data => {
-                            sessionStorage.setItem('questionData', data.questions); // データをキャッシュ
+                            sessionStorage.setItem('questionData', JSON.stringify(data.questions)); // データをキャッシュ
                             return data.questions;
                         }),
 
@@ -71,13 +73,14 @@ const app = Vue.createApp({
                             return response.json();
                         })
                         .then(data => {
-                            sessionStorage.setItem('captionData', data.captions); // データをキャッシュ
+                            sessionStorage.setItem('captionData', JSON.stringify(data.captions)); // データをキャッシュ
                             return data.captions;
                         }),
 
                 fetch("code.json")
                     .then(response => response.json())
                     .then(data => {
+                        sessionStorage.setItem('typeData', JSON.stringify(data.types)); // データをキャッシュ
                         // 取得したtypesをthisに格納
                         this.types = data.types;
                         // remainingTypesにtypesのキーを格納
